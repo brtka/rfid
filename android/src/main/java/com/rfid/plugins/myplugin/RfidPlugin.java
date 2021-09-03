@@ -35,21 +35,21 @@ public class RfidPlugin extends Plugin {
                     ret.put("hash", result.Hash);
                     ret.put("UID", result.TagId);
 
-                    notifyListeners("myPluginEvent", ret);
+                    notifyListeners("rfid", ret);
                 }
 
                 @Override
                 public void dataDownloadFailed(TagResultClass result) {
                     JSObject ret = new JSObject();
                     ret.put("resultContent", result.ResultContent);
-                    notifyListeners("myPluginEvent", ret);
+                    notifyListeners("rfid", ret);
                 }
 
                 @Override
                 public void onPreExecute(String info) {
                     JSObject ret = new JSObject();
                     ret.put("resultContent", info);
-                    notifyListeners("myPluginEvent", ret);
+                    notifyListeners("rfid", ret);
                 }
             });
             readTask.execute();
@@ -65,13 +65,13 @@ public class RfidPlugin extends Plugin {
 
             JSObject ret = new JSObject();
             ret.put("resultContent", "NFC NOT supported on this devices!");
-            notifyListeners("myPluginEvent", ret);
+            notifyListeners("rfid", ret);
         } else if (!nfcAdapter.isEnabled()) {
             //Toast.makeText(getContext(), "NFC NOT Enabled!", Toast.LENGTH_LONG).show();
 
             JSObject ret = new JSObject();
             ret.put("resultContent", "NFC NOT Enabled!");
-            notifyListeners("myPluginEvent", ret);
+            notifyListeners("rfid", ret);
         }
     }
 
@@ -98,7 +98,7 @@ public class RfidPlugin extends Plugin {
         } catch (Exception ex) {
             JSObject ret = new JSObject();
             ret.put("resultContent", "Error reading pass");
-            notifyListeners("myPluginEvent", ret);
+            notifyListeners("rfid", ret);
         }
         return array;
     }
